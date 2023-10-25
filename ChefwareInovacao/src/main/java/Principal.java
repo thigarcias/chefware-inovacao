@@ -4,38 +4,40 @@ import java.net.Socket;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
-public class Principal {
+public class Servidor {
     public static void main(String[] args) throws IOException {
         Scanner leitor = new Scanner(System.in);
         ServerSocket serverSocket = new ServerSocket(4000);
         boolean rodar = true;
+
         while (rodar) {
             try {
-                    Socket socket = serverSocket.accept();
-                    System.out.println("Cliente conectou");
+                Socket socket = serverSocket.accept();
+                System.out.println("Cliente conectou");
+
                 while (true) {
                     String comando = leitor.nextLine();
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                     if ("desligar".equals(comando)) {
-                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                         out.println("desligar");
                     } else if ("reiniciar".equals(comando)) {
-                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                         out.println("reiniciar");
                     } else if ("bloquear".equals(comando)) {
-                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                         out.println("bloquear");
-                    } else if ("sair".equals(comando)){
-                        return;
-                    } else if ("mensagem".equals(comando)){
-                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    } else if ("sair".equals(comando)) {
+                        out.println("sair");
+                        rodar = false;
+                        break;
+                    } else if ("mensagem".equals(comando)) {
                         out.println("mensagem");
+                    } else {
+                        out.println("comando_invalido");
                     }
                 }
             } catch (IOException e) {
                 System.err.println(e);
             }
         }
-
+        serverSocket.close();
     }
 }
