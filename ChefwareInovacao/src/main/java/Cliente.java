@@ -31,6 +31,12 @@ public class Cliente {
             } catch (IOException ex){
                 System.err.println("Erro ao executar o comando de bloqueio: " + ex.getMessage());
             }
+        } else if ("mensagem".equals(comando)) {
+            try{
+                Runtime.getRuntime().exec("echo Oi");
+            } catch (IOException ex){
+                System.err.println("Erro ao executar o comando de bloqueio: " + ex.getMessage());
+            }
         } else {
             System.out.println("O comando ta errado");
         }
