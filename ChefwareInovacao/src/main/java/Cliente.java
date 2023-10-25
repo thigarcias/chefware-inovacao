@@ -5,7 +5,7 @@ import java.net.Socket;
 
 public class Cliente {
     public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("177.170.166.76", 4000);
+        Socket socket = new Socket("131.72.61.70", 4000);
         InputStreamReader input = new InputStreamReader(socket.getInputStream());
         BufferedReader output = new BufferedReader(input);
 
