@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="java-exs-chat:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/java_exs_chat_jar</output-path>
+    <root id="archive" name="java-exs-chat.jar">
+      <element id="module-output" name="java-exs-chat" />
+    </root>
+  </artifact>
+</component>
