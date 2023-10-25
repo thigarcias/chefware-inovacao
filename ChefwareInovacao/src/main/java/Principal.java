@@ -12,10 +12,6 @@ public class Principal {
         boolean rodar = true;
         while (rodar) {
             try {
-                String oi = leitor.nextLine();
-                if (oi.equals("sair")){
-                    rodar = false;
-                }
                     Socket socket = serverSocket.accept();
                     System.out.println("Cliente conectou");
                 while (true) {

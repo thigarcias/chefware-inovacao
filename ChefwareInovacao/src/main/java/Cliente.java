@@ -5,7 +5,7 @@ import java.net.Socket;
 
 public class Cliente {
     public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("131.72.61.70", 4000);
+        Socket socket = new Socket("100.25.160.62", 4000);
         InputStreamReader input = new InputStreamReader(socket.getInputStream());
         BufferedReader output = new BufferedReader(input);
 
@@ -33,9 +33,9 @@ public class Cliente {
             }
         } else if ("mensagem".equals(comando)) {
             try{
-                Runtime.getRuntime().exec("echo Oi");
+                Runtime.getRuntime().exec("echo oi");
             } catch (IOException ex){
-                System.err.println("Erro ao executar o comando de bloqueio: " + ex.getMessage());
+                System.err.println("Erro ao executar o comando de mensagem: " + ex.getMessage());
             }
         } else {
             System.out.println("O comando ta errado");
