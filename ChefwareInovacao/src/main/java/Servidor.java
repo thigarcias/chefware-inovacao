@@ -24,12 +24,12 @@ public class Servidor {
                         out.println("reiniciar");
                     } else if ("bloquear".equals(comando)) {
                         out.println("bloquear");
+                    } else if ("mensagem".equals(comando)) {
+                        out.println("mensagem");
                     } else if ("sair".equals(comando)) {
                         out.println("sair");
                         rodar = false;
                         break;
-                    } else if ("mensagem".equals(comando)) {
-                        out.println("mensagem");
                     } else {
                         out.println("comando_invalido");
                     }
