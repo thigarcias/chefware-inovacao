@@ -1,4 +1,4 @@
-package executor;
+package chefware;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,9 @@ import java.net.Socket;
 
 public class Servidor {
     public static void main(String[] args) throws IOException {
+        System.out.println("Iniciando o servidor...");
         ServerSocket serverSocket = new ServerSocket(4000);
+        System.out.println("Servidor iniciado com sucesso!");
         boolean rodar = true;
 
         while (rodar) {
