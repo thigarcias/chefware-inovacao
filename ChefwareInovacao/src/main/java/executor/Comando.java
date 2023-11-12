@@ -1,4 +1,4 @@
-package com.chefware.chefware;
+package executor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 @RestController
-public class Controller {
+public class Comando {
     @PostMapping("/inovacao")
     public ResponseEntity<String> bloquear(@RequestBody Chefware comando) throws IOException {
         Socket socket = new Socket("localhost", 4000);
@@ -20,7 +20,7 @@ public class Controller {
         }
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         out.println(comando.getComando());
-        return ResponseEntity.ok("Comando teste");
+        return ResponseEntity.ok("Comando %s executado com sucessos!".formatted(comando.getComando()));
     }
 }
 

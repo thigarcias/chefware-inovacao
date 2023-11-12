@@ -1,4 +1,4 @@
-package com.chefware.chefware;
+package executor;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
