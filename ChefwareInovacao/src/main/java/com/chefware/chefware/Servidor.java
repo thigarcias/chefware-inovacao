@@ -1,18 +1,33 @@
+package com.chefware.chefware;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Cliente {
+public class Servidor {
     public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("100.25.160.62", 4000);
-        InputStreamReader input = new InputStreamReader(socket.getInputStream());
-        BufferedReader output = new BufferedReader(input);
+        ServerSocket serverSocket = new ServerSocket(4000);
         boolean rodar = true;
 
         while (rodar) {
-            String comando = output.readLine();
-            System.out.println("Comando recebido do servidor: " + comando);
+            Socket socket = serverSocket.accept();
+            System.out.println("Cliente conectou");
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String comando = input.readLine();
+
+            System.out.println("Comando recebido do cliente: " + comando);
+
+
+
+            try {
+                Thread.sleep(1000); // 1000 milissegundos = 1 segundo
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
             if ("desligar".equals(comando)) {
                 try {
                     Runtime.getRuntime().exec("shutdown -s -t 1");
@@ -40,7 +55,10 @@ public class Cliente {
             }
 
 
+            socket.close();
+
         }
-        socket.close();
+
+        serverSocket.close();
     }
 }
