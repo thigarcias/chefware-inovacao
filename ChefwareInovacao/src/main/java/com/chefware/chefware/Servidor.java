@@ -13,7 +13,7 @@ public class Servidor {
 
         while (rodar) {
             Socket socket = serverSocket.accept();
-            System.out.println("Cliente conectou");
+            System.out.println("Chefware conectou");
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String comando = input.readLine();
 

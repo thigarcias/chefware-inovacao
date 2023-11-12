@@ -12,18 +12,14 @@ import java.net.Socket;
 @RestController
 public class Controller {
     @PostMapping("/inovacao")
-    public ResponseEntity<String> bloquear(@RequestBody String comando) throws IOException {
-        System.out.println("OII");
-        System.out.println(comando);
+    public ResponseEntity<String> bloquear(@RequestBody Chefware comando) throws IOException {
         Socket socket = new Socket("localhost", 4000);
-        if (comando == null || comando.isEmpty()) {
+        if (comando.getComando() == null || comando.isEmpty()) {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println("O comando não pode ser nulo ou vazio.");
         }
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        out.println(comando);
-
-
+        out.println(comando.getComando());
         return ResponseEntity.ok("Comando teste");
     }
 }
