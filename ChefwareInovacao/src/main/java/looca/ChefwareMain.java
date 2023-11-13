@@ -31,7 +31,7 @@ public class ChefwareMain {
         servidorThread.start();
         Thread.sleep(1000);
 
-        // Looping de captura de dados
+        // Looping de captura de dados.
         Querys query = new Querys();
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(() -> {
