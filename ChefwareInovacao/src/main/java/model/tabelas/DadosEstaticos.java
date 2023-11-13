@@ -1,4 +1,4 @@
-package banco.tabelas;
+package model.tabelas;
 
 import lombok.Getter;
 import lombok.Setter;

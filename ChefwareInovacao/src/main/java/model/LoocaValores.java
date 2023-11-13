@@ -1,4 +1,4 @@
-package banco;
+package model;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.rede.RedeInterface;
@@ -48,14 +48,7 @@ public class LoocaValores {
         discoTamanho = looca.getGrupoDeDiscos().getVolumes().get(0).getTotal();
         discoLivre = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
 
-//        List<Disco> listaDiscos = looca.getGrupoDeDiscos().getDiscos();
-//        for (Disco disco: listaDiscos) {
-//            discoNome.add(disco.getNome());
-//            discoModelo.add(disco.getModelo());
-//            discoTamanho.add(disco.getTamanho());
-//        }
         // Rede
-
         List<RedeInterface> listaRedes = looca.getRede().getGrupoDeInterfaces().getInterfaces();
         for (int i = 0; i < listaRedes.size(); i++) {
             if(!listaRedes.get(i).getEnderecoIpv4().isEmpty()) {
