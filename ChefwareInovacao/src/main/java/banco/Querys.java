@@ -3,6 +3,7 @@ package banco;
 import banco.tabelas.DadosEstaticos;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import track.Log;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +24,7 @@ public class Querys {
     }
 
     public void operacao(String query) {
+        Log.printLog("Realizando a operação: "+ query);
         Conexao conexao = new Conexao();
         LoocaValores valores = new LoocaValores();
         JdbcTemplate con = conexao.getConexaoDoBanco();
@@ -30,26 +32,33 @@ public class Querys {
 
         if (query.equals("m")) {
             // DADOS ESTATICOS
+            Log.printLog("Select de validação na tabela DadosEstaticos");
             List<DadosEstaticos> dadosEstaticos = con.query("""
                     SELECT Especificacoes.tipo, Dados.descricao, Dados.valor, Dados.unidadeMedida from Dados JOIN Especificacoes ON fkEspecificacoes = idEspecificacoes;
                     """, new BeanPropertyRowMapper<>(DadosEstaticos.class));
             Boolean existoNoBanco = false;
+            Log.printLog("Iniciando a validação da existência do dado estático no Banco");
             for (DadosEstaticos dados : dadosEstaticos) {
                 if (dados.getDescricao().contains("Memoria")) {
                     existoNoBanco = true;
                     break;
                 }
             }
+            Log.printLog("Validação encerrada: "+ existoNoBanco);
             if (!existoNoBanco) {
+                Log.printLog("Inserindo os dados estaticos no banco de dados");
                 con.update("INSERT INTO Dados VALUES (?,?,?,?,?,?,?)", null, "Memoria Espaço Total", valores.converterValor(valores.getMemoriaTotal()), "GB", 1, 1, 1);
+                Log.printLog("Dados estaticos inseridos com sucesso!");
                 System.out.println("Componentes inseridos no banco!");
             } else {
                 //TODO Criar validação se o valor permanece o mesmo do looca
             }
 
             // DADOS DINAMICOS
+            Log.printLog("Inserindo os dados dinamicos no banco de dados");
             con.update("INSERT INTO Historico VALUES (?, ?, ?, ?, ?, ?, ?, ?)", null, 1, 1, 1, formattedDateTime,"Memoria em Uso", valores.converterValor(valores.getMemoriaEmUso()), "GB");
             con.update("INSERT INTO Historico VALUES (?, ?, ?, ?, ?, ?, ?, ?)", null, 1, 1, 1, formattedDateTime,"Memoria Disponível", valores.converterValor(valores.getMemoriaDisponivel()), "GB");
+            Log.printLog("Dados dinamicos inseridos com sucesso!");
             System.out.println("Operação realizada com sucesso!!");
         }
 

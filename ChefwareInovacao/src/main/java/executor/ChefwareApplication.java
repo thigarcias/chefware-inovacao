@@ -14,6 +14,5 @@ public class ChefwareApplication {
 		Log.printLog("Inicializando a aplicação Chefware");
 		Thread.sleep(2000);
 		Principal.main(new String[]{});
-
 	}
 }

@@ -19,7 +19,6 @@ public class Log {
         data = zone.format(formatter);
         LOG_FILE_PATH = "src/main/logs/chefware" + data + ".log";
     }
-
     public Log() {
         try {
             if (data == null) {
@@ -44,11 +43,4 @@ public class Log {
         logger.close();
     }
 
-    public String getLog() {
-        return log;
-    }
-
-    public void setLog(String log) {
-        this.log = log;
-    }
 }

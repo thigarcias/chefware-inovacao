@@ -68,7 +68,11 @@ public class Principal {
                             case "m", "d", "c", "r" -> {
                                 ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
                                 executor.scheduleAtFixedRate(() -> {
-                                    query.operacao(decisao);
+                                    try {
+                                        query.operacao(decisao);
+                                    } catch (Exception e) {
+                                        Log.printLog(e.toString());
+                                    }
                                 }, 0, 5, TimeUnit.SECONDS);
                                 String inC = leitor.nextLine();
                                 if (inC.equals("sair")) {
