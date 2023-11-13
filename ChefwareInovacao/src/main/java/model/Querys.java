@@ -13,8 +13,6 @@ public class Querys {
 
     LoocaValores valores = new LoocaValores();
     String formattedDateTime;
-    String user;
-    String senha;
 
     public void dataHora() {
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
@@ -47,7 +45,7 @@ public class Querys {
         // DADOS ESTATICOS
         Log.printLog("[MEMORIA] Select de validação na tabela DadosEstaticos");
         List<DadosEstaticos> dadosEstaticos = con.query("""
-                SELECT Especificacoes.tipo, Dados.descricao, Dados.valor, Dados.unidadeMedida from Dados JOIN Especificacoes ON fkEspecificacoes = idEspecificacoes;
+                SELECT Especificacoes.tpo, Dados.descricao, Dados.valor, Dados.unidadeMedida from Dados JOIN Especificacoes ON fkEspecificacoes = idEspecificacoes;
                 """, new BeanPropertyRowMapper<>(DadosEstaticos.class));
         Boolean existoNoBanco = false;
         Log.printLog("[MEMORIA] Iniciando a validação da existência do dado estático no Banco");

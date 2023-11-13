@@ -15,7 +15,7 @@ public class ChefwareMain {
     public static void startChefware() throws InterruptedException {
         Thread servidorThread = new Thread(() -> {
             try {
-                Servidor.main(new String[]{});
+                Servidor.serverStart();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -38,7 +38,8 @@ public class ChefwareMain {
             try {
                 query.operacao();
             } catch (Exception e) {
-                Log.printLog(e.toString());
+                System.err.println(e);
+                Log.printLog("[ERR] [CHEFWARE] "+ e);
             }
         }, 0, 5, TimeUnit.SECONDS);
     }
