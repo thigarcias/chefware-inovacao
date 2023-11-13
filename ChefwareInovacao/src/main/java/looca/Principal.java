@@ -3,8 +3,14 @@ package looca;
 import banco.Querys;
 import chefware.Servidor;
 import com.github.britooo.looca.api.core.Looca;
+import org.springframework.beans.factory.annotation.Autowired;
+import track.Log;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,16 +25,22 @@ public class Principal {
                 e.printStackTrace();
             }
         });
-        servidorThread.start();
 
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            String data = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss"));
+            System.out.println(data + " --- Encerrando a aplicação");
+            servidorThread.interrupt();
+            Log.close();
+        }));
+        servidorThread.start();
         Thread.sleep(1000);
+
 
         Looca looca = new Looca();
         Querys query = new Querys();
         Operacao operacoes = new Operacao();
         Scanner leitor = new Scanner(System.in);
         boolean running = true;
-
 
         while (running) {
             System.out.println("""
@@ -73,6 +85,7 @@ public class Principal {
                     break;
                 case 2:
                     boolean verDados = true;
+                    Log.printLog("Operação sucedida");
                     System.out.println("Computador: " + looca.getRede().getParametros().getHostName() + "\n" +
                             "\nVer Memória, digite m" +
                             "\nVer Processos, digite p" +

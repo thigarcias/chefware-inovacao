@@ -22,14 +22,6 @@ public class Querys {
         formattedDateTime = zonedDateTime.format(formatter);
     }
 
-    public void usuarioBanco() {
-        Scanner iN = new Scanner(System.in);
-        System.out.println("Digite o usuario da sua conta no MySQL");
-        user = iN.nextLine();
-        System.out.println("Digite a senha da sua conta no MySQL");
-        senha = iN.nextLine();
-    }
-
     public void operacao(String query) {
         Conexao conexao = new Conexao();
         LoocaValores valores = new LoocaValores();
@@ -65,7 +57,8 @@ public class Querys {
             // DADOS ESTATICOS
             List<DadosEstaticos> dadosEstaticos = con.query("""
                     SELECT Especificacoes.tipo, Dados.descricao, Dados.valor, Dados.unidadeMedida from Dados JOIN Especificacoes ON fkEspecificacoes = idEspecificacoes;
-                    """, new BeanPropertyRowMapper<>(DadosEstaticos.class));          Boolean existoNoBanco = false;
+                    """, new BeanPropertyRowMapper<>(DadosEstaticos.class));
+            Boolean existoNoBanco = false;
             for (DadosEstaticos dados : dadosEstaticos) {
                 if (dados.getDescricao().equals("Disco")) {
                     existoNoBanco = true;

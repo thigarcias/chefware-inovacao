@@ -11,10 +11,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 @RestController
-public class Comando {
+public class ChefwareController {
     @PostMapping("/inovacao")
     @CrossOrigin
-    public ResponseEntity<String> bloquear(@RequestBody Chefware comando) throws IOException {
+    public ResponseEntity<String> comando(@RequestBody ChefwareRequest comando) throws IOException {
         Socket socket = new Socket("localhost", 4000);
         if (comando.getComando() == null || comando.getComando().isEmpty()) {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);

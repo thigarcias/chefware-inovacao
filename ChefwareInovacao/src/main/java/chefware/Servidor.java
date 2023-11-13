@@ -1,25 +1,30 @@
 package chefware;
 
+import track.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Servidor {
     public static void main(String[] args) throws IOException {
+        Log.printLog("Inicializando o servidor Socket");
         System.out.println("Iniciando o servidor...");
         ServerSocket serverSocket = new ServerSocket(4000);
+        Log.printLog("Servidor socket iniciado com sucesso na porta 4000");
         System.out.println("Servidor iniciado com sucesso!");
         boolean rodar = true;
 
         while (rodar) {
             Socket socket = serverSocket.accept();
-            System.out.println("Chefware conectou");
+            Log.printLog("Cliente conectado");
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String comando = input.readLine();
 
-            System.out.println("Comando recebido do cliente: " + comando);
+            Log.printLog("Comando recebido do cliente: " + comando);
 
 
 
@@ -50,10 +55,12 @@ public class Servidor {
                 }
             } else if ("mensagem".equals(comando)) {
                 System.out.println("Mensagem recebida do servidor: oi");
+                Log.printLog("Mensagem recebida do servidor: oi");
             } else if ("sair".equals(comando)) {
                 rodar = false;
             } else {
-                System.out.println("O comando ta errado");
+                Log.printLog("Houve a tentativada de execução de comando, porém ele é invalido");
+
             }
 
 
